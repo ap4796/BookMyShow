@@ -3,7 +3,6 @@ package com.example.BookMyShow.Converter;
 
 import com.example.BookMyShow.Model.UserEntity;
 import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
-import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
 import com.example.BookMyShow.dto.ResponseDto.UserResponseDto;
 import lombok.experimental.UtilityClass;
 

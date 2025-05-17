@@ -31,13 +31,13 @@ public class TheatreEntity {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ShowEntity> shows;
 
     TheatreType type;
 
-    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TheatreSeatsEntity> seats = new ArrayList<>();
 }

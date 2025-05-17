@@ -4,12 +4,13 @@ import com.example.BookMyShow.Converter.UserConverter;
 import com.example.BookMyShow.Model.UserEntity;
 import com.example.BookMyShow.Repository.UserRepository;
 import com.example.BookMyShow.Service.UserService;
+import com.example.BookMyShow.Exception.UserNotFoundException;
 
-import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
 import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
 import com.example.BookMyShow.dto.ResponseDto.UserResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,12 +28,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto getUser(int id) {
 
-        UserEntity user = new UserEntity(); //By default user.
+        Optional<UserEntity> userOpt = userRepository.findById(id);
 
-        UserEntity userEntity = userRepository.findById(id).get();
+        if (userOpt.isEmpty()) {
+            throw new UserNotFoundException("User not found with id: " + id);
+        }
 
-        UserResponseDto userResponseDto = UserConverter.convertEntityToDto(userEntity);
-
-        return userResponseDto;
+        UserEntity userEntity = userOpt.get();
+        return UserConverter.convertEntityToDto(userEntity);
     }
 }

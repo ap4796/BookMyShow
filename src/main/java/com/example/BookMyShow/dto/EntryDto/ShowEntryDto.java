@@ -24,5 +24,5 @@ public class ShowEntryDto {
     MovieResponseDto movieResponseDto;
 
     @NotNull
-    TheatreResponseDto theaterResponseDto;
+    TheatreResponseDto TheatreResponseDto;
 }

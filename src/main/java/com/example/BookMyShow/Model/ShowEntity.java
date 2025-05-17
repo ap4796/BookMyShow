@@ -50,7 +50,7 @@ public class ShowEntity {
     //Must require
     @ManyToOne
     @JsonIgnore
-    private TheatreEntity theater;
+    private TheatreEntity theatre;
 
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
     @JsonIgnore

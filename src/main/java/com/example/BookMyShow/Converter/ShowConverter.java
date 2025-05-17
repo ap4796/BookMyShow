@@ -20,7 +20,7 @@ public class ShowConverter {
                 .showTime(showEntity.getShowTime())
                 .showDate(showEntity.getShowDate())
                 .movieResponseDto(showEntryDto.getMovieResponseDto())
-                .theaterDto(showEntryDto.getTheaterResponseDto())
+                .TheatreDto(showEntryDto.getTheatreResponseDto())
                 .build();
     }
 }

@@ -31,7 +31,7 @@ public class ShowSeatsEntity {
     @Column(name = "seat_type", nullable = false)
     private SeatType seatType;
 
-    @Column(name = "booked_at", columnDefinition = "bit(1) default 0", nullable = false)
+    @Column(name = "is_booked", columnDefinition = "bit(1) default 0", nullable = false)
     private boolean booked;
 
     @Temporal(TemporalType.TIMESTAMP)

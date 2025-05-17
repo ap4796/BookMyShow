@@ -26,7 +26,7 @@ public class ShowServiceImpl implements ShowService {
     MovieRepository movieRepository;
 
     @Autowired
-    TheatreRepository theaterRepository;
+    TheatreRepository TheatreRepository;
 
     @Autowired
     ShowSeatsRepository showSeatsRepository;
@@ -42,16 +42,16 @@ public class ShowServiceImpl implements ShowService {
         //MovieEntity
         MovieEntity movieEntity = movieRepository.findById(showEntryDto.getMovieResponseDto().getId()).get();
 
-        TheatreEntity theaterEntity = theaterRepository.findById(showEntryDto.getTheaterResponseDto().getId()).get();
+        TheatreEntity TheatreEntity = TheatreRepository.findById(showEntryDto.getTheatreResponseDto().getId()).get();
 
 
         showEntity.setMovie(movieEntity); //Why are we setting these variables
-        showEntity.setTheater(theaterEntity);
+        showEntity.setTheatre(TheatreEntity);
 
         showEntity = showRepository.save(showEntity);
 
-        //We need to pass the list of the theater seats
-        List<ShowSeatsEntity> l=generateShowEntitySeats(theaterEntity.getSeats(),showEntity);
+        //We need to pass the list of the Theatre seats
+        List<ShowSeatsEntity> l=generateShowEntitySeats(TheatreEntity.getSeats(),showEntity);
 
         showSeatsRepository.saveAll(l);
 
@@ -61,17 +61,17 @@ public class ShowServiceImpl implements ShowService {
         return showResponseDto;
     }
 
-    public List<ShowSeatsEntity> generateShowEntitySeats(List<TheatreSeatsEntity> theaterSeatsEntityList,ShowEntity showEntity){
+    public List<ShowSeatsEntity> generateShowEntitySeats(List<TheatreSeatsEntity> TheatreSeatsEntityList,ShowEntity showEntity){
 
         List<ShowSeatsEntity> showSeatsEntityList = new ArrayList<>();
 
-        //log.info(String.valueOf(theaterSeatsEntityList));
-//        log.info("The list of theaterEntity Seats");
-//        for(TheaterSeatsEntity tse: theaterSeatsEntityList){
+        //log.info(String.valueOf(TheatreSeatsEntityList));
+//        log.info("The list of TheatreEntity Seats");
+//        for(TheatreSeatsEntity tse: TheatreSeatsEntityList){
 //            log.info(tse.toString());
 //        }
 
-        for(TheatreSeatsEntity tse : theaterSeatsEntityList){
+        for(TheatreSeatsEntity tse : TheatreSeatsEntityList){
             ShowSeatsEntity showSeatsEntity = ShowSeatsEntity.builder().seatNumber(tse.getSeatNumber())
                     .seatType(tse.getSeatType()).rate(tse.getRate()).build();
 
@@ -92,11 +92,11 @@ public class ShowServiceImpl implements ShowService {
     public ShowResponseDto getShow(int id) {
         ShowEntity showEntity=showRepository.findById(id).get();
         MovieEntity movieEntity=movieRepository.findById(showEntity.getMovie().getId()).get();
-        TheatreEntity theaterEntity=theaterRepository.findById(showEntity.getTheater().getId()).get();
+        TheatreEntity TheatreEntity=TheatreRepository.findById(showEntity.getTheatre().getId()).get();
         MovieResponseDto movieResponseDto= MovieConverter.convertEntityToDto(movieEntity);
-        TheatreResponseDto theaterResponseDto= TheatreConverter.convertEntityToDto(theaterEntity);
+        TheatreResponseDto TheatreResponseDto= TheatreConverter.convertEntityToDto(TheatreEntity);
         ShowEntryDto showEntryDto=ShowEntryDto.builder().showDate(showEntity.getShowDate()).showTime(showEntity.getShowTime())
-                .movieResponseDto(movieResponseDto).theaterResponseDto(theaterResponseDto).build();
+                .movieResponseDto(movieResponseDto).TheatreResponseDto(TheatreResponseDto).build();
         return ShowConverter.convertEntityToDto(showEntity, showEntryDto);
     }
 

@@ -19,6 +19,6 @@ public class ShowResponseDto {
 
     MovieResponseDto movieResponseDto;
 
-    TheatreResponseDto theaterDto;
+    TheatreResponseDto TheatreDto;
 
 }

@@ -1,9 +1,9 @@
 package com.example.BookMyShow.Controller;
 
-import com.example.BookMyShow.Service.Impl.UserServiceImpl;
-import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
+import com.example.BookMyShow.Service.UserService;
 import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
 import com.example.BookMyShow.dto.ResponseDto.UserResponseDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +15,14 @@ public class UserController {
 
 
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity addUser(@RequestBody UserEntryDto userEntryDto){
+    public ResponseEntity<String> addUser(@Valid @RequestBody UserEntryDto userEntryDto){
 
         userService.addUser(userEntryDto);
 
-        return new ResponseEntity("Added a success User", HttpStatus.CREATED);
+        return new ResponseEntity("Added a User Successfully", HttpStatus.CREATED);
 
     }
 
